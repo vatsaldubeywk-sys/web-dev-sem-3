@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quiz</title>
+<style>
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #eef2f7;
+  text-align: center;
+  color: #1f2937;
+}
+
+.container {
+  width: 400px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #1e3a8a;
+  margin-bottom: 5px;
+}
+
+h2, h3 {
+  color: #334155;
+}
+
+label {
+  font-weight: bold;
+  color: #334155;
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #1e3a8a;
+}
+
+button {
+  padding: 10px 25px;
+  margin-top: 15px;
+  cursor: pointer;
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+button:hover:enabled {
+  background-color: #16306b;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: #94a3b8;
+  opacity: 0.7;
+}
+
+.option {
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  background-color: #f8fafc;
+  color: #1f2937;
+}
+
+.option:hover {
+  background-color: #dbeafe;
+  border-color: #1e3a8a;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="page_login">
+  <h1>Quiz</h1>
+  <label>Username:</label><br>
+  <input type="text" id="username"><br><br>
+  <label>Roll Number:</label><br>
+  <input type="text" id="rollnumber"><br><br>
+  <label>Class:</label><br>
+  <input type="text" id="userclass"><br><br>
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="container hidden" id="page_q1">
+  <h1>Quiz</h1>
+  <h3>Question 1 of 5</h3>
+  <p>What is the capital of France?</p>
+  <div class="option" onclick="selectOption(this, false)">London</div>
+  <div class="option" onclick="selectOption(this, true)">Paris</div>
+  <div class="option" onclick="selectOption(this, false)">Berlin</div>
+  <div class="option" onclick="selectOption(this, false)">Madrid</div>
+  <br>
+  <button id="submitBtn1" onclick="goNext('page_q1', 'page_q2')" disabled>Submit</button>
+</div>
+
+<div class="container hidden" id="page_q2">
+  <h1>Quiz</h1>
+  <h3>Question 2 of 5</h3>
+  <p>Which planet is known as the Red Planet?</p>
+  <div class="option" onclick="selectOption(this, false)">Venus</div>
+  <div class="option" onclick="selectOption(this, true)">Mars</div>
+  <div class="option" onclick="selectOption(this, false)">Jupiter</div>
+  <div class="option" onclick="selectOption(this, false)">Saturn</div>
+  <br>
+  <button id="submitBtn2" onclick="goNext('page_q2', 'page_q3')" disabled>Submit</button>
+</div>
+
+<div class="container hidden" id="page_q3">
+  <h1>Quiz</h1>
+  <h3>Question 3 of 5</h3>
+  <p>How many legs does a spider have?</p>
+  <div class="option" onclick="selectOption(this, false)">6</div>
+  <div class="option" onclick="selectOption(this, true)">8</div>
+  <div class="option" onclick="selectOption(this, false)">10</div>
+  <div class="option" onclick="selectOption(this, false)">4</div>
+  <br>
+  <button id="submitBtn3" onclick="goNext('page_q3', 'page_q4')" disabled>Submit</button>
+</div>
+
+<div class="container hidden" id="page_q4">
+  <h1>Quiz</h1>
+  <h3>Question 4 of 5</h3>
+  <p>Which language runs in a web browser?</p>
+  <div class="option" onclick="selectOption(this, false)">Python</div>
+  <div class="option" onclick="selectOption(this, false)">C++</div>
+  <div class="option" onclick="selectOption(this, true)">JavaScript</div>
+  <div class="option" onclick="selectOption(this, false)">Java</div>
+  <br>
+  <button id="submitBtn4" onclick="goNext('page_q4', 'page_q5')" disabled>Submit</button>
+</div>
+
+<div class="container hidden" id="page_q5">
+  <h1>Quiz</h1>
+  <h3>Question 5 of 5</h3>
+  <p>What is the largest ocean on Earth?</p>
+  <div class="option" onclick="selectOption(this, false)">Atlantic Ocean</div>
+  <div class="option" onclick="selectOption(this, false)">Indian Ocean</div>
+  <div class="option" onclick="selectOption(this, false)">Arctic Ocean</div>
+  <div class="option" onclick="selectOption(this, true)">Pacific Ocean</div>
+  <br>
+  <button id="submitBtn5" onclick="goNext('page_q5', 'page_result')" disabled>Submit</button>
+</div>
+
+<div class="container hidden" id="page_result">
+  <h1>Quiz</h1>
+  <h2>Thank You!</h2>
+  <p id="resultText"></p>
+</div>
+
+<script>
+let username = "";
+let rollnumber = "";
+let userclass = "";
+let score = 0;
+let answered = false;
+let currentQuestion = 1;
+
+function login() {
+  username = document.getElementById("username").value;
+  rollnumber = document.getElementById("rollnumber").value;
+  userclass = document.getElementById("userclass").value;
+
+  if (username == "" || rollnumber == "" || userclass == "") {
+    alert("Please fill all the fields");
+    return;
+  }
+
+  document.getElementById("page_login").classList.add("hidden");
+  document.getElementById("page_q1").classList.remove("hidden");
+}
+
+function selectOption(e, isCorrect) {
+  if (answered == true) {
+    return;
+  }
+  answered = true;
+
+  if (isCorrect == true) {
+    e.style.backgroundColor = "green";
+    e.style.color = "white";
+    score = score + 1;
+  } else {
+    e.style.backgroundColor = "red";
+    e.style.color = "white";
+  }
+
+  document.getElementById("submitBtn" + currentQuestion).disabled = false;
+}
+
+function goNext(currentId, nextId) {
+  document.getElementById(currentId).classList.add("hidden");
+  document.getElementById(nextId).classList.remove("hidden");
+  answered = false;
+  currentQuestion = currentQuestion + 1;
+
+  if (nextId == "page_result") {
+    document.getElementById("resultText").innerHTML =
+      "Name: " + username + "<br>" +
+      "Roll Number: " + rollnumber + "<br>" +
+      "Class: " + userclass + "<br><br>" +
+      "Your Score: " + score + " / 5";
+  }
+}
+</script>
+
+</body>
+</html>

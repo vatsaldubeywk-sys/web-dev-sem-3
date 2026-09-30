@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: whitesmoke;
+}
+
+header {
+    padding: 1px;
+    background: #2f4858;
+    color: whitesmoke;
+}
+
+.cred {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;                 
+    width: 100%;               
+    max-width: 350px;
+    margin: 2px;
+    padding: 20px;             
+    background: white;        
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-top: 1px;
+    padding: 10px;             
+    box-sizing: border-box;
+}
+
+.submit {
+    padding: 10px;             
+    border: 0;
+    border-radius: 3px;
+    background: #2f4858;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.credentials{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Five Questions</title>
+<link rel="stylesheet" href="style2.css">
+</head>
+<body>
+<div class="head"><h1>QUESTIONS</h1></div>
+<h1 class="q1">Which planet in our solar system has the most moons?</h1>
+<label><input type="radio" class="answer" name="q1" value="a">Jupiter</label><br>
+<label><input type="radio" class="answer" id="correct" name="q1" value="b">Saturn</label><br>
+<label><input type="radio" class="answer" name="q1" value="c">Uranus</label><br>
+<label><input type="radio" class="answer" name="q1" value="d">Neptune</label><br>
+
+<h1>What is the time complexity of binary search on a sorted array?</h1>
+<label><input type="radio" name="q2" value="a">O(n)</label><br>
+<label><input type="radio" name="q2" value="b">O(log n)</label><br>
+<label><input type="radio" name="q2" value="c">O(n log n)</label><br>
+<label><input type="radio" name="q2" value="d">O(1)</label>
+
+<h1>Which river is the longest in India?</h1>
+<label><input type="radio" name="q3" value="a">Yamuna</label><br>
+<label><input type="radio" name="q3" value="b">Godavari</label><br>
+<label><input type="radio" name="q3" value="c">Ganga</label><br>
+<label><input type="radio" name="q3" value="d">Brahmaputra</label>
+
+<h1>Which HTML tag is used to create a hyperlink?</h1>
+<label><input type="radio" name="q4" value="a">&lt;link&gt;</label><br>
+<label><input type="radio" name="q4" value="b">&lt;href&gt;</label><br>
+<label><input type="radio" name="q4" value="c">&lt;a&gt;</label><br>
+<label><input type="radio" name="q4" value="d">&lt;url&gt;</label>
+
+<h1>What is the chemical symbol for gold?</h1>
+<label><input type="radio" name="q5" value="a">Go</label><br>
+<label><input type="radio" name="q5" value="b">Gd</label><br>
+<label><input type="radio" name="q5" value="c">Ag</label><br>
+<label><input type="radio" name="q5" value="d">Au</label>
+
+<script>
+let correct = document.getElementById('correct');
+let answers = document.querySelectorAll('.answer');
+
+for (let i = 0; i < answers.length; i++) {
+  answers[i].onclick = () => {
+    if (answers[i].value == correct.value) {
+      answers[i].parentElement.style.color = 'green';
+    } else {
+      answers[i].parentElement.style.color = 'red';
+    }
+  };
+}
+</script>
+
+</body>
+</html>
